@@ -1,7 +1,5 @@
 package project4;
 
-import java.util.Arrays;
-
 public final class MaxHeap<T extends Comparable<? super T>>
              implements MaxHeapInterface<T>
 {
@@ -31,6 +29,29 @@ public final class MaxHeap<T extends Comparable<? super T>>
       lastIndex = 0;
       integrityOK = true;
    } // end constructor
+   
+   public MaxHeap(T[] contents)
+   {
+      int initialCapacity = contents.length;
+      // Is initialCapacity too small?
+      if (initialCapacity < DEFAULT_CAPACITY)
+         initialCapacity = DEFAULT_CAPACITY;
+      else // Is initialCapacity too big?
+         checkCapacity(initialCapacity);
+      
+      // The cast is safe because the new array contains null entries
+      @SuppressWarnings("unchecked")
+      T[] tempHeap = (T[])new Comparable[initialCapacity + 1];
+      heap = tempHeap;
+      for(int i = 0; i < contents.length; i++)
+      {
+         heap[i] = contents[i];
+      }
+      lastIndex = initialCapacity;
+      reheap(0);
+      integrityOK = true;
+   } // end constructor
+
 
    public void add(T newEntry)
    {
@@ -40,6 +61,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
    public T removeMax()
    {
+      return null;
    // See Segment 27.12.
    // Slide 25.
    } // end removeMax
