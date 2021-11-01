@@ -16,7 +16,7 @@ public class HeapTest
       buildMaxHeapWithAdd("project4/data_random.txt");
    }
    
-   public static void buildMaxHeapWithAdd(String fileName) throws IOException
+   public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
    {
       MaxHeapInterface<Integer> heap = new MaxHeap<Integer>();
       String messageTxt = getStringFromFile(fileName);
@@ -26,6 +26,20 @@ public class HeapTest
          String line = lines[i];
          heap.add(Integer.parseInt(line));
       }
+      return heap;
+   }
+   public static MaxHeapInterface<Integer> buildMaxHeapWithReheap(String fileName) throws IOException
+   {
+      String messageTxt = getStringFromFile(fileName);
+      String[] lines = messageTxt.split("\r\n|\n|\r");
+      Integer[] nums = new Integer[lines.length];
+      for(int i = 0; i < lines.length; i++)
+      {
+         String line = lines[i];
+         nums[i] = Integer.parseInt(line);
+      }
+      MaxHeapInterface<Integer> heap = new MaxHeap<Integer>(nums);
+      return heap;
    }
 
    public static String getStringFromFile(String filename) throws IOException
