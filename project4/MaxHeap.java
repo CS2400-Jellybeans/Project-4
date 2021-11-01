@@ -1,7 +1,5 @@
 package project4;
 
-import java.util.Arrays;
-
 public final class MaxHeap<T extends Comparable<? super T>>
              implements MaxHeapInterface<T>
 {
@@ -40,6 +38,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
    public T removeMax()
    {
+      return null;
    // See Segment 27.12.
    // Slide 25.
    } // end removeMax
