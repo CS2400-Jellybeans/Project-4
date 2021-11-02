@@ -1,5 +1,7 @@
 package project4;
 
+import java.util.Arrays;
+
 public final class MaxHeap<T extends Comparable<? super T>>
              implements MaxHeapInterface<T>
 {
@@ -111,16 +113,25 @@ public final class MaxHeap<T extends Comparable<? super T>>
       return result;
    } // end toString
 
+   private void ensureCapacity()
+   {
+      if (lastIndex >= heap.length - 1) // If array is full, double its size
+      {
+         int newLength = 2 * heap.length;
+         checkCapacity(newLength);
+         heap = Arrays.copyOf(heap, newLength);
+      } // end if
+   } // end ensureCapacity
    private void checkCapacity(int capacity)
    {
       if (capacity > MAX_CAPACITY)
          throw new IllegalStateException("Attempted to create a heap whose capacity exceeds " +
                                          "allowed maximum of " + MAX_CAPACITY);
-   }
+   } // end checkCapacity
    public void checkIntegrity()
    {
       if (!integrityOK)
          throw new SecurityException("Heap object is corrupt.");
-   }
+   } // end checkIntegrity
    
 } // end MaxHeap
