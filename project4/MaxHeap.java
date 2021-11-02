@@ -101,6 +101,16 @@ public final class MaxHeap<T extends Comparable<? super T>>
       lastIndex = 0;
    } // end clear
 
+   public String toString()
+   {
+      String result = "";
+      for(T value : heap)
+      {
+         result += value.toString();
+      }
+      return result;
+   } // end toString
+
    private void checkCapacity(int capacity)
    {
       if (capacity > MAX_CAPACITY)

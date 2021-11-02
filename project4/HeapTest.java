@@ -12,8 +12,11 @@ public class HeapTest
       //System.out.print("Enter the name of the file: ");
       //fileName = kb.nextLine();
 
-      System.out.println("File contents:");
-      buildMaxHeapWithAdd("project4/data_random.txt");
+      MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data_random.txt");
+      System.out.println("Heap built with sequential insertions: " + addHeap.toString());
+
+      MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithAdd("project4/data_random.txt");
+      System.out.println("Heap built using optimal method: " + reheapHeap.toString());
    }
    
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
