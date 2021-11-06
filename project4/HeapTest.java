@@ -7,29 +7,17 @@ public class HeapTest
 {
    public static void main(String[] args) throws IOException
    {
-      //String fileName = "";
-      //Scanner kb = new Scanner(System.in);
-      //System.out.print("Enter the name of the file: ");
-      //fileName = kb.nextLine();
-
-      MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data_sorted.txt");
-      System.out.println("Heap built with sequential insertions:\n" + addHeap.toString()
-                         + "\nNumber of swaps done in the heap creation: " + addHeap.getSwaps());
-      for(int i = 0; i < 10; i++)
-      {
-         addHeap.removeMax();
-      }
-      System.out.println("Heap after 10 removals:\n" + addHeap.toString() + "\n");
-
-      MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithReheap("project4/data_sorted.txt");
-      System.out.println("Heap built using optimal method:\n" + reheapHeap.toString()
-                         + "\nNumber of swaps done in the heap creation: " + reheapHeap.getSwaps()
-                         + "\n");
-      for(int i = 0; i < 10; i++)
-      {
-         reheapHeap.removeMax();
-      }
-      System.out.println("Heap after 10 removals:\n" + reheapHeap.toString() + "\n");
+      createHeaps();
+      String outputString = createHeaps();
+      outputToFile("project4/output.txt", outputString);
+      System.out.print("Heaps succesfully created. Output stored in the file \"output.txt.\"");
+   }
+   public static String createHeaps() throws IOException
+   {
+      MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data.txt");
+      MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithReheap("project4/data.txt");
+      String finalString = generateFullHeapString(addHeap, reheapHeap);
+      return finalString;
    }
    
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
@@ -74,5 +62,35 @@ public class HeapTest
       }
       inputFile.close();
       return output;
+   }
+
+   public static String formattedHeapString(MaxHeapInterface<Integer> heap, boolean sequential)
+   {
+      String output = "";
+      output += "Heap built using " + (sequential ? "sequential insertions" : "optimal method")
+             + "\n" + heap.toString() + "\nNumber of swaps done in the heap creation: "
+             + heap.getSwaps() + "\n";
+      for(int i = 0; i < 10; i++)
+      {
+         heap.removeMax();
+      }
+      output += "Heap after 10 removals:\n" + heap.toString() + "\n";
+      return output;
+   }
+
+   public static String generateFullHeapString(MaxHeapInterface<Integer> addHeap,
+                                         MaxHeapInterface<Integer> reheapHeap)
+   {
+      String outputString = "";
+      outputString += formattedHeapString(addHeap, true) + "\n"
+                   + formattedHeapString(reheapHeap, false);
+      return outputString;
+   }
+   
+   public static void outputToFile(String fileName, String content) throws IOException
+   {
+      PrintWriter outFile = new PrintWriter(fileName);
+      outFile.print(content);
+      outFile.close();
    }
 }

@@ -81,6 +81,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
       {
          root = heap[1];            // Return value
          heap[1] = heap[lastIndex]; // Form a semiheap
+         heap[lastIndex]= null;
          lastIndex--;               // Decrease size
          reheap(1);                 // Transform to a heap
       } // end if
