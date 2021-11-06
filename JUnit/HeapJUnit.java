@@ -8,13 +8,16 @@ import project4.MaxHeapInterface;
 
 public class HeapJUnit extends TestCase
 {
-   MaxHeapInterface<Integer> testHeap;
+   MaxHeapInterface<Integer> integerHeap;
+   MaxHeapInterface<String> stringHeap;
+   MaxHeapInterface<Character> charHeap;
    String expectedOutput;
 
    @Override
    protected void setUp() throws Exception
    {
-      testHeap = new MaxHeap<>();
+      integerHeap = new MaxHeap<>();
+      stringHeap = new MaxHeap<>();
    }
 
    //Testing heap creation with sequential add.
@@ -25,9 +28,9 @@ public class HeapJUnit extends TestCase
       int[] input = new int[]{1, 2, 3, 4, 5};
       for(int num : input)
       {
-         testHeap.add(num);
+         integerHeap.add(num);
       }
-      assertEquals(expectedOutput, testHeap.toString());
+      assertEquals(expectedOutput, integerHeap.toString());
    }
 
    //Testing heap creation with reheap.
@@ -36,8 +39,8 @@ public class HeapJUnit extends TestCase
    {
       expectedOutput = "5, 4, 3, 1, 2";
       Integer[] input = new Integer[]{1, 2, 3, 4, 5};
-      testHeap = new MaxHeap<Integer>(input);
-      assertEquals(expectedOutput, testHeap.toString());
+      integerHeap = new MaxHeap<Integer>(input);
+      assertEquals(expectedOutput, integerHeap.toString());
    }
 
    //Should get the correct root.
@@ -45,9 +48,9 @@ public class HeapJUnit extends TestCase
    public void testGetMax()
    {
       Integer[] input = new Integer[]{1, 2, 3, 4, 5};
-      testHeap = new MaxHeap<Integer>(input);
+      integerHeap = new MaxHeap<Integer>(input);
       Integer num = 5;
-      assertEquals(num, testHeap.getMax());
+      assertEquals(num, integerHeap.getMax());
    }
 
    //Testing root removal.
@@ -56,9 +59,20 @@ public class HeapJUnit extends TestCase
    {
       expectedOutput = "4, 2, 3, 1";
       Integer[] input = new Integer[]{1, 2, 3, 4, 5};
-      testHeap = new MaxHeap<Integer>(input);
-      testHeap.removeMax();
-      assertEquals(expectedOutput, testHeap.toString());
+      integerHeap = new MaxHeap<Integer>(input);
+      integerHeap.removeMax();
+      assertEquals(expectedOutput, integerHeap.toString());
+   }
+
+   //Testing heap creation with a different data type.
+   //Organizes lexographically.
+   @Test
+   public void testGeneric()
+   {
+      expectedOutput = "You, Today, Are, How, Hello";
+      String[] input = new String[]{"Hello", "How", "Are", "You", "Today"};
+      stringHeap = new MaxHeap<String>(input);
+      assertEquals(expectedOutput, stringHeap.toString());
    }
 }
    
