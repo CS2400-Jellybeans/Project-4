@@ -24,6 +24,10 @@ public interface MaxHeapInterface<T extends Comparable<? super T>>
        @return  The number of entries currently in the heap. */
    public int getSize();
 
+   /** Gets the number of swaps that were needed to create this heap.
+       @return  The number swaps this heap has made. */
+   public int getSwaps();
+
    /** Removes all entries from this heap. */
    public void clear();
 } // end MaxHeapInterface

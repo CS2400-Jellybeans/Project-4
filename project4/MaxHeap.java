@@ -34,26 +34,19 @@ public final class MaxHeap<T extends Comparable<? super T>>
       integrityOK = true;
    } // end constructor
    
-   public MaxHeap(T[] contents)
+   public MaxHeap(T[] entries)
    {
-      int initialCapacity = contents.length;
-      // Is initialCapacity too small?
-      if (initialCapacity < DEFAULT_CAPACITY)
-         initialCapacity = DEFAULT_CAPACITY;
-      else // Is initialCapacity too big?
-         checkCapacity(initialCapacity);
-      
-      // The cast is safe because the new array contains null entries
-      @SuppressWarnings("unchecked")
-      T[] tempHeap = (T[])new Comparable[initialCapacity + 1];
-      heap = tempHeap;
-      for(int i = 0; i < contents.length; i++)
-      {
-         heap[i] = contents[i];
-      }
-      lastIndex = initialCapacity;
-      reheap(0);
-      integrityOK = true;
+      this(entries.length); // Call other constructor
+      lastIndex = entries.length;
+      // Assertion: integrityOK = true
+
+      // Copy given array to data field
+      for (int index = 0; index < entries.length; index++)
+         heap[index + 1] = entries[index];
+
+      // Create heap
+      for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--)
+         reheap(rootIndex);
    } // end constructor
 
 
@@ -69,6 +62,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
          heap[newIndex] = heap[parentIndex];
          newIndex = parentIndex;
          parentIndex = newIndex / 2;
+         swapsDone ++;
       } // end while
    
       heap[newIndex] = newEntry;
@@ -108,12 +102,13 @@ public final class MaxHeap<T extends Comparable<? super T>>
       // See Slide 25.
       boolean done = false;
       T orphan = heap[rootIndex];
-      int leftChildIndex = 2 * rootIndex + 1;
+      int leftChildIndex = 2 * rootIndex;
    
       while (!done && (leftChildIndex <= lastIndex))
       {
          int largerChildIndex = leftChildIndex;
          int rightChildIndex = leftChildIndex + 1;
+         swapsDone++;
    
          if ( (rightChildIndex <= lastIndex) &&
                heap[rightChildIndex].compareTo(heap[largerChildIndex]) > 0)
@@ -125,7 +120,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
          {
             heap[rootIndex] = heap[largerChildIndex];
             rootIndex = largerChildIndex;
-            leftChildIndex = 2 * rootIndex + 1;
+            leftChildIndex = 2 * rootIndex;
          }
          else
             done = true;
@@ -143,6 +138,11 @@ public final class MaxHeap<T extends Comparable<? super T>>
    {
       return lastIndex;
    } // end getSize
+
+   public int getSwaps()
+   {
+      return swapsDone;
+   } // end getSwaps
 
    public void clear()
    {
@@ -164,7 +164,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
          if(value != null)
          {
             result += (value.toString());
-            if(i <= heap.length && heap[i+1] != null)
+            if(i < heap.length - 1 && heap[i+1] != null)
             {
                result += ", ";
             }

@@ -12,11 +12,24 @@ public class HeapTest
       //System.out.print("Enter the name of the file: ");
       //fileName = kb.nextLine();
 
-      MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data_random.txt");
-      System.out.println("Heap built with sequential insertions:\n" + addHeap.toString());
+      MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data_sorted.txt");
+      System.out.println("Heap built with sequential insertions:\n" + addHeap.toString()
+                         + "\nNumber of swaps done in the heap creation: " + addHeap.getSwaps());
+      for(int i = 0; i < 10; i++)
+      {
+         addHeap.removeMax();
+      }
+      System.out.println("Heap after 10 removals:\n" + addHeap.toString() + "\n");
 
-      MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithAdd("project4/data_random.txt");
-      System.out.println("Heap built using optimal method:\n" + reheapHeap.toString());
+      MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithReheap("project4/data_sorted.txt");
+      System.out.println("Heap built using optimal method:\n" + reheapHeap.toString()
+                         + "\nNumber of swaps done in the heap creation: " + reheapHeap.getSwaps()
+                         + "\n");
+      for(int i = 0; i < 10; i++)
+      {
+         reheapHeap.removeMax();
+      }
+      System.out.println("Heap after 10 removals:\n" + reheapHeap.toString() + "\n");
    }
    
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
