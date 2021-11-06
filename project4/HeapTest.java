@@ -11,7 +11,12 @@ public class HeapTest
       String outputString = createHeaps();
       outputToFile("project4/output.txt", outputString);
       System.out.print("Heaps succesfully created. Output stored in the file \"output.txt.\"");
-   }
+   } // end main
+   
+   /**
+    * Creates two heaps, one using sequential additions and the other using reheap.
+    * @return A string with the formatted output.
+    */
    public static String createHeaps() throws IOException
    {
       MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data.txt");
@@ -21,7 +26,11 @@ public class HeapTest
                    + formattedHeapString(reheapHeap, false);
       return outputString;
    }
-   
+
+   /**
+    * Builds a max heap from a file's data using sequential additions.
+    * @param fileName The name of the input file.
+    */
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
    {
       MaxHeapInterface<Integer> heap = new MaxHeap<Integer>();
@@ -34,6 +43,11 @@ public class HeapTest
       }
       return heap;
    }
+
+   /**
+    * Builds a max heap from a file's data using reheap.
+    * @param fileName The name of the input file.
+    */
    public static MaxHeapInterface<Integer> buildMaxHeapWithReheap(String fileName) throws IOException
    {
       String messageTxt = getStringFromFile(fileName);
@@ -48,6 +62,11 @@ public class HeapTest
       return heap;
    }
 
+   /**
+    * Gets a string from a file.
+    * @param fileName The name of the input file.
+    * @return A string containing the data in the file.
+    */
    public static String getStringFromFile(String filename) throws IOException
    {
       String output = "";
@@ -66,6 +85,11 @@ public class HeapTest
       return output;
    }
 
+   /**
+    * Takes the heap and outputs its data in a readable format, also removes 10 values.
+    * @param heap The heap to use.
+    * @param sequential A boolean indicating whether this heap was built sequentially or not.
+    */
    public static String formattedHeapString(MaxHeapInterface<Integer> heap, boolean sequential)
    {
       String output = "";
@@ -80,6 +104,11 @@ public class HeapTest
       return output;
    }
    
+   /**
+    * Writes a string to a file.
+    * @param filename The name of the output file.
+    * @param content The string to write to the file.
+    */
    public static void outputToFile(String fileName, String content) throws IOException
    {
       PrintWriter outFile = new PrintWriter(fileName);

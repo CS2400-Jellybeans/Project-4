@@ -17,6 +17,10 @@ public final class MaxHeap<T extends Comparable<? super T>>
       this(DEFAULT_CAPACITY); // Call next constructor
    } // end default constructor
    
+   /**
+    * Builds an empty max heap.
+    * @param initialCapacity the initial capacity of the heap array.
+    */
    public MaxHeap(int initialCapacity)
    {
       // Is initialCapacity too small?
@@ -34,6 +38,10 @@ public final class MaxHeap<T extends Comparable<? super T>>
       integrityOK = true;
    } // end constructor
    
+   /**
+    * Builds a max heap using the reheap method.
+    * @param entries An array of data to build the heap from.
+    */
    public MaxHeap(T[] entries)
    {
       this(entries.length); // Call other constructor
@@ -49,11 +57,12 @@ public final class MaxHeap<T extends Comparable<? super T>>
          reheap(rootIndex);
    } // end constructor
 
-
+   /**
+    * Adds a new entry to this heap.
+    * @param newEntry An object to be added.
+    */
    public void add(T newEntry)
    {
-      // See Segment 27.8.
-      // Slide 19.
       checkIntegrity();        // Ensure initialization of data fields
       int newIndex = lastIndex + 1;
       int parentIndex = newIndex / 2;
@@ -70,10 +79,12 @@ public final class MaxHeap<T extends Comparable<? super T>>
       ensureCapacity();
    } // end add
 
+   /**
+    * Removes the root data of this heap.
+    * @return The data that was removed.
+    */
    public T removeMax()
    {
-      // See Segment 27.12.
-      // Slide 25.
       checkIntegrity();             // Ensure initialization of data fields
       T root = null;
 
@@ -100,7 +111,6 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
    public void reheap(int rootIndex)
    {
-      // See Slide 25.
       boolean done = false;
       T orphan = heap[rootIndex];
       int leftChildIndex = 2 * rootIndex;
