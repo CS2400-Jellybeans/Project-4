@@ -10,6 +10,7 @@
 + Implemented methods into maxHeap build systems
 + Wrote JUnit tests
 ## Extra features
++ Utilizes maxHeapInterface and generic data
 + JUnit tests (See JUnit folder)
 + Video:
 + Javadoc:
