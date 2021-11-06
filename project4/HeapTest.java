@@ -16,8 +16,10 @@ public class HeapTest
    {
       MaxHeapInterface<Integer> addHeap = buildMaxHeapWithAdd("project4/data.txt");
       MaxHeapInterface<Integer> reheapHeap = buildMaxHeapWithReheap("project4/data.txt");
-      String finalString = generateFullHeapString(addHeap, reheapHeap);
-      return finalString;
+      String outputString = "";
+      outputString += formattedHeapString(addHeap, true) + "\n"
+                   + formattedHeapString(reheapHeap, false);
+      return outputString;
    }
    
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
@@ -76,15 +78,6 @@ public class HeapTest
       }
       output += "Heap after 10 removals:\n" + heap.toString() + "\n";
       return output;
-   }
-
-   public static String generateFullHeapString(MaxHeapInterface<Integer> addHeap,
-                                         MaxHeapInterface<Integer> reheapHeap)
-   {
-      String outputString = "";
-      outputString += formattedHeapString(addHeap, true) + "\n"
-                   + formattedHeapString(reheapHeap, false);
-      return outputString;
    }
    
    public static void outputToFile(String fileName, String content) throws IOException
