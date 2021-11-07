@@ -16,6 +16,7 @@ public class HeapTest
    /**
     * Creates two heaps, one using sequential additions and the other using reheap.
     * @return A string with the formatted output.
+    * @throws IOException Throws if an error occurs while reading or writing data.
     */
    public static String createHeaps() throws IOException
    {
@@ -30,6 +31,8 @@ public class HeapTest
    /**
     * Builds a max heap from a file's data using sequential additions.
     * @param fileName The name of the input file.
+    * @return A maxHeapInterface containing the file's data.
+    * @throws IOException Throws if an error occurs while reading or writing data.
     */
    public static MaxHeapInterface<Integer> buildMaxHeapWithAdd(String fileName) throws IOException
    {
@@ -47,6 +50,8 @@ public class HeapTest
    /**
     * Builds a max heap from a file's data using reheap.
     * @param fileName The name of the input file.
+    * @return A maxHeapInterface containing the file's data.
+    * @throws IOException Throws if an error occurs while reading or writing data.
     */
    public static MaxHeapInterface<Integer> buildMaxHeapWithReheap(String fileName) throws IOException
    {
@@ -66,11 +71,12 @@ public class HeapTest
     * Gets a string from a file.
     * @param fileName The name of the input file.
     * @return A string containing the data in the file.
+    * @throws IOException Throws if an error occurs while reading or writing data.
     */
-   public static String getStringFromFile(String filename) throws IOException
+   public static String getStringFromFile(String fileName) throws IOException
    {
       String output = "";
-      File file = new File(filename);
+      File file = new File(fileName);
       if (!file.exists())
       {
          System.out.println("file not found.");
@@ -89,6 +95,7 @@ public class HeapTest
     * Takes the heap and outputs its data in a readable format, also removes 10 values.
     * @param heap The heap to use.
     * @param sequential A boolean indicating whether this heap was built sequentially or not.
+    * @return A formatted string containing the heap's data.
     */
    public static String formattedHeapString(MaxHeapInterface<Integer> heap, boolean sequential)
    {
@@ -106,8 +113,9 @@ public class HeapTest
    
    /**
     * Writes a string to a file.
-    * @param filename The name of the output file.
+    * @param fileName The name of the output file.
     * @param content The string to write to the file.
+    * @throws IOException Throws if an error occurs while reading or writing data.
     */
    public static void outputToFile(String fileName, String content) throws IOException
    {
