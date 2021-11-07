@@ -100,6 +100,9 @@ public final class MaxHeap<T extends Comparable<? super T>>
    return root;
    } // end removeMax
 
+   /**
+    * @return The root of this heap.
+    */
    public T getMax()
    {
 		checkIntegrity();
@@ -109,6 +112,10 @@ public final class MaxHeap<T extends Comparable<? super T>>
       return root;
    } // end getMax
 
+   /**
+    * Reheaps the tree to put it in proper heap format.
+    * @param rootIndex The root to start reheaping from.
+    */
    public void reheap(int rootIndex)
    {
       boolean done = false;
@@ -140,21 +147,33 @@ public final class MaxHeap<T extends Comparable<? super T>>
       heap[rootIndex] = orphan;
    } // end reheap
 
+   /**
+    * @return True if this heap is empty. False otherwise.
+    */
    public boolean isEmpty()
    {
       return lastIndex < 1;
    } // end isEmpty
 
+   /**
+    * @return The current size of the heap.
+    */
    public int getSize()
    {
       return lastIndex;
    } // end getSize
 
+   /**
+    * @return The number of swaps that have been performed thus far.
+    */
    public int getSwaps()
    {
       return swapsDone;
    } // end getSwaps
 
+   /**
+    * Empties out this heap.
+    */
    public void clear()
    {
 		checkIntegrity();
@@ -166,6 +185,9 @@ public final class MaxHeap<T extends Comparable<? super T>>
       lastIndex = 0;
    } // end clear
 
+   /**
+    * @return A string containing the contents of this heap.
+    */
    public String toString()
    {
       String result = "";
@@ -184,6 +206,9 @@ public final class MaxHeap<T extends Comparable<? super T>>
       return result;
    } // end toString
 
+   /**
+    * ensures this heap is large enough. If not, doubles the size.
+    */
    private void ensureCapacity()
    {
       if (lastIndex >= heap.length - 1) // If array is full, double its size
@@ -193,12 +218,21 @@ public final class MaxHeap<T extends Comparable<? super T>>
          heap = Arrays.copyOf(heap, newLength);
       } // end if
    } // end ensureCapacity
+
+   /**
+    * Ensures this heap does not exceed max capacity.
+    * @param capacity The value to check against max.
+    */
    private void checkCapacity(int capacity)
    {
       if (capacity > MAX_CAPACITY)
          throw new IllegalStateException("Attempted to create a heap whose capacity exceeds " +
                                          "allowed maximum of " + MAX_CAPACITY);
    } // end checkCapacity
+
+   /**
+    * Ensures this heap is not corrupt. Otherwise throws a security exception.
+    */
    public void checkIntegrity()
    {
       if (!integrityOK)

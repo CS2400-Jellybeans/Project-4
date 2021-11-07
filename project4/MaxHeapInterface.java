@@ -2,32 +2,46 @@ package project4;
 
 public interface MaxHeapInterface<T extends Comparable<? super T>>
 {
-   /** Adds a new entry to this heap.
-       @param newEntry  An object to be added. */
+   /**
+    * Adds a new entry to this heap.
+    * @param newEntry An object to be added.
+    */
    public void add(T newEntry);
 
-   /** Removes and returns the largest item in this heap.
-       @return  Either the largest object in the heap or,
-                if the heap is empty before the operation, null. */
+   /**
+    * Removes and returns the largest item in this heap.
+    * @return Either the largest object in the heap or,
+    *         if the heap is empty before the operation, null.
+    */
    public T removeMax();
 
-   /** Retrieves the largest item in this heap.
-       @return  Either the largest object in the heap or,
-                if the heap is empty, null. */
+   /**
+    * Retrieves the largest item in this heap.
+    * @return Either the largest object in the heap or,
+    *         if the heap is empty, null.
+    */
    public T getMax();
 
-   /** Detects whether this heap is empty.
-       @return  True if the heap is empty, or false otherwise. */
+   /**
+    * Detects whether this heap is empty.
+    * @return True if the heap is empty, or false otherwise.
+    */
    public boolean isEmpty();
 
-   /** Gets the size of this heap.
-       @return  The number of entries currently in the heap. */
+   /**
+    * Gets the size of this heap.
+    * @return The number of entries currently in the heap.
+    */
    public int getSize();
 
-   /** Gets the number of swaps that were needed to create this heap.
-       @return  The number swaps this heap has made. */
+   /**
+    * Retrieves the number of swaps that were needed to create this heap.
+    * @return  The number swaps this heap has made.
+    */
    public int getSwaps();
 
-   /** Removes all entries from this heap. */
+   /**
+    * Removes all entries from this heap.
+    */
    public void clear();
 } // end MaxHeapInterface
