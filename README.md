@@ -13,4 +13,4 @@
 + Utilizes maxHeapInterface and generic data
 + JUnit tests (See JUnit folder)
 + Video:
-+ Javadoc:
++ Javadoc: https://raw.githack.com/CS2400-Jellybeans/Project-4/main/javadoc/index.html
